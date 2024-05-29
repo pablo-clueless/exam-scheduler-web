@@ -1,0 +1,5 @@
+export { default as Forgot } from "./forgot.svg"
+export { default as Login } from "./login.svg"
+export { default as SignUp } from "./signup.svg"
+export { default as UserImage } from "./avatar.jpg"
+export { default as Verified } from "./verified.svg"
