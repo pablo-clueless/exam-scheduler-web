@@ -15,21 +15,19 @@ export type StudentProps = {
 }
 
 export type ExamOfficerProps = {
-	department: null
+	department: number
 	employee_id: string
-	exam: null
-	exam_officer_name: string
 	id: string
 	job_title: string
+	exam_officer: string
 }
 
 export type SupervisorProps = {
-	department: null
+	department: number
 	employee_id: string
-	exam: null
 	id: string
 	job_title: string
-	supervisor_name: string
+	supervisor: string
 }
 
 export type CourseProps = {

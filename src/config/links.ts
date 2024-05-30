@@ -18,14 +18,14 @@ export const SidebarLinks = [
 		icon: GridFour,
 	},
 	{
-		name: "Departments",
-		href: "/dashboard/departments",
-		icon: UsersFour,
-	},
-	{
 		name: "Courses",
 		href: "/dashboard/courses",
 		icon: Book,
+	},
+	{
+		name: "Departments",
+		href: "/dashboard/departments",
+		icon: UsersFour,
 	},
 	{
 		name: "Schedules",

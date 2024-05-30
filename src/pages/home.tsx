@@ -29,7 +29,7 @@ const Home = () => {
 		onSuccess: ({ data }) => {
 			const { token, user } = data
 			signIn(user, token)
-			navigate("/dashboard")
+			navigate("/dashboard/courses")
 		},
 		onError: ({ response }: HttpError) => {
 			const { error } = response.data

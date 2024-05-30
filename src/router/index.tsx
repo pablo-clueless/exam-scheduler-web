@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import DashboardLayout from "layouts/dashboard-layout"
 import AuthRoute from "./AuthRoute"
 import {
+	Admin,
 	Admins,
 	Course,
 	Courses,
@@ -51,6 +52,7 @@ const Router = () => {
 						<Route path="students" element={<Students />} />
 						<Route path="students/:id" element={<Student />} />
 						<Route path="admins" element={<Admins />} />
+						<Route path="admins/:id" element={<Admin />} />
 						<Route path="user" element={<User />} />
 					</Route>
 				</Route>

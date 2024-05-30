@@ -2,6 +2,7 @@ import React from "react"
 
 export const Dashboard = React.lazy(() => import("./dashboard"))
 
+export const Admin = React.lazy(() => import("./admin"))
 export const Admins = React.lazy(() => import("./admins"))
 
 export const Course = React.lazy(() => import("./course"))

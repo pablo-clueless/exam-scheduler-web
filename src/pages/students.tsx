@@ -36,9 +36,6 @@ const Students = () => {
 		<div className="flex h-full w-full flex-col gap-5 p-5">
 			<div className="flex w-full items-center justify-between">
 				<p className="text-xl font-bold">Students</p>
-				<Link to="/dashboard/Students/create">
-					<Button>Add Student</Button>
-				</Link>
 			</div>
 			<div className="flex h-[90dvh] w-full flex-col gap-10">
 				<div className="h-[615px] w-full">
@@ -72,7 +69,7 @@ const Students = () => {
 					current={page}
 					onPageChange={(page) => setPage(page)}
 					pageSize={10}
-					total={Students.length}
+					total={students.length}
 				/>
 			</div>
 		</div>
