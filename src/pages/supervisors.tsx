@@ -53,7 +53,7 @@ const Supervisors = () => {
 							{paginated.map((supervisor) => (
 								<TableRow key={supervisor.id}>
 									<TableCell>{supervisor.employee_id}</TableCell>
-									<TableCell>{supervisor.supervisor}</TableCell>
+									<TableCell>{supervisor.supervisor.full_name}</TableCell>
 									<TableCell>{supervisor.job_title}</TableCell>
 									<TableCell>{supervisor.department}</TableCell>
 									<TableCell>

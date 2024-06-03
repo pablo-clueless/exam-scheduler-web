@@ -171,7 +171,7 @@ const CreateSchedule = () => {
 							<SelectContent>
 								{supervisors.map((supervisor) => (
 									<SelectItem key={supervisor.id} value={supervisor.id}>
-										{supervisor.supervisor_name}
+										{supervisor.supervisor.full_name}
 									</SelectItem>
 								))}
 							</SelectContent>
@@ -186,7 +186,7 @@ const CreateSchedule = () => {
 							<SelectContent>
 								{examOfficers.map((examOfficer) => (
 									<SelectItem key={examOfficer.id} value={examOfficer.id}>
-										{examOfficer.exam_officer_name}
+										{examOfficer.exam_officer.full_name}
 									</SelectItem>
 								))}
 							</SelectContent>

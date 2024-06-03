@@ -57,7 +57,7 @@ const Home = () => {
 		<main className="h-screen w-full">
 			<div className="grid h-full w-full grid-cols-1 lg:grid-cols-2">
 				<div className="flex h-full w-full flex-col items-center justify-center">
-					<h1 className="mb-14 text-4xl font-bold">Exam Scheduler</h1>
+					<h1 className="mb-14 text-4xl font-bold">Exam Management System</h1>
 					<h3 className="text-2xl font-semibold">Welcome Back</h3>
 					<p>Please enter your login credentials</p>
 					<form

@@ -53,7 +53,7 @@ const Admins = () => {
 							{paginated.map((admin) => (
 								<TableRow key={admin.id}>
 									<TableCell>{admin.employee_id}</TableCell>
-									<TableCell>{admin.exam_officer}</TableCell>
+									<TableCell>{admin.exam_officer.full_name}</TableCell>
 									<TableCell>{admin.job_title}</TableCell>
 									<TableCell>{admin.department}</TableCell>
 									<TableCell>

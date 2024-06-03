@@ -97,6 +97,11 @@ body {
 	color: #000;
 }
 
+input:-webkit-autofill {
+	transition: background-color 5000s ease-in-out 0s;
+	background-color: transparent;
+}
+
 .link {
 	position: relative;
 	width: fit-content;

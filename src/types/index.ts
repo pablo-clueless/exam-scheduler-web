@@ -3,12 +3,14 @@ export type UserProps = {
 	full_name: string
 	id: string
 	role: "student" | "supervisor" | "admin"
+	created_at: string
+	updated_at: string
 }
 
 export type StudentProps = {
 	id: string
 	student_reg_number: string
-	student: string
+	student: UserProps
 	department: number
 	matriculated: boolean
 	year: number
@@ -19,7 +21,7 @@ export type ExamOfficerProps = {
 	employee_id: string
 	id: string
 	job_title: string
-	exam_officer: string
+	exam_officer: UserProps
 }
 
 export type SupervisorProps = {
@@ -27,7 +29,7 @@ export type SupervisorProps = {
 	employee_id: string
 	id: string
 	job_title: string
-	supervisor: string
+	supervisor: UserProps
 }
 
 export type CourseProps = {

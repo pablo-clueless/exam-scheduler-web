@@ -52,7 +52,7 @@ const Students = () => {
 							{paginated.map((student) => (
 								<TableRow key={student.id}>
 									<TableCell>{student.student_reg_number}</TableCell>
-									<TableCell>{student.student}</TableCell>
+									<TableCell>{student.student.full_name}</TableCell>
 									<TableCell>{student.department}</TableCell>
 									<TableCell>{student.year}</TableCell>
 									<TableCell>
