@@ -45,8 +45,8 @@ export type ScheduleProps = {
 	course: string
 	date_time: string
 	venue: string
-	supervisors: string[]
-	exam_officer: string
+	supervisors: SupervisorProps[]
+	exam_officer: ExamOfficerProps
 }
 
 export type DepartmentProps = {

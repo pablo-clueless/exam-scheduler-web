@@ -59,7 +59,7 @@ const Schedules = () => {
 									<TableCell>{schedule.id}</TableCell>
 									<TableCell>{formatDate(schedule.date_time)}</TableCell>
 									<TableCell className="capitalize">{schedule.venue}</TableCell>
-									<TableCell>{schedule.exam_officer}</TableCell>
+									<TableCell>{schedule.exam_officer.exam_officer.full_name}</TableCell>
 									<TableCell>
 										<Link to={`/dashboard/schedules/${schedule.id}`}>
 											<Button>View</Button>
