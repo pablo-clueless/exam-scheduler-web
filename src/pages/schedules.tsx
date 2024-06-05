@@ -1,5 +1,5 @@
+import { Link, useNavigate } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
 import React from "react"
 
 import { formatDate, instance, paginate } from "lib"
@@ -19,6 +19,7 @@ import {
 const Schedules = () => {
 	const [schedules, setSchedules] = React.useState<ScheduleProps[]>([])
 	const [page, setPage] = React.useState(1)
+	const navigate = useNavigate()
 
 	const { data } = useQuery({
 		queryFn: () =>
@@ -61,9 +62,14 @@ const Schedules = () => {
 									<TableCell className="capitalize">{schedule.venue}</TableCell>
 									<TableCell>{schedule.exam_officer.exam_officer.full_name}</TableCell>
 									<TableCell>
-										<Link to={`/dashboard/schedules/${schedule.id}`}>
-											<Button>View</Button>
-										</Link>
+										<Button
+											onClick={() =>
+												navigate(`/dashboard/schedules/${schedule.id}`, {
+													state: schedule,
+												})
+											}>
+											View
+										</Button>
 									</TableCell>
 								</TableRow>
 							))}

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import React from "react"
 
 import Pagination from "components/pagination"
@@ -19,6 +19,7 @@ import {
 const Admins = () => {
 	const [admins, setAdmins] = React.useState<ExamOfficerProps[]>([])
 	const [page, setPage] = React.useState(1)
+	const navigate = useNavigate()
 
 	const { data } = useQuery({
 		queryFn: () =>
@@ -57,9 +58,12 @@ const Admins = () => {
 									<TableCell>{admin.job_title}</TableCell>
 									<TableCell>{admin.department}</TableCell>
 									<TableCell>
-										<Link to={`/dashboard/Admins/${admin.id}`}>
-											<Button>View</Button>
-										</Link>
+										<Button
+											onClick={() =>
+												navigate(`/dashboard/admins/${admin.id}`, { state: admin })
+											}>
+											View
+										</Button>
 									</TableCell>
 								</TableRow>
 							))}
