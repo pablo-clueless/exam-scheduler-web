@@ -47,20 +47,16 @@ const Courses = () => {
 							<TableRow>
 								<TableHead>ID</TableHead>
 								<TableHead>Course Name</TableHead>
+								<TableHead>Course Code</TableHead>
 								<TableHead>Department</TableHead>
-								<TableHead></TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
 							{paginated.map((course) => (
 								<TableRow key={course.id}>
 									<TableCell>{course.course_name}</TableCell>
+									<TableCell>{course.course_code}</TableCell>
 									<TableCell>{course.department}</TableCell>
-									<TableCell>
-										<Link to={`/dashboard/courses/${course.id}`}>
-											<Button>View</Button>
-										</Link>
-									</TableCell>
 								</TableRow>
 							))}
 						</TableBody>
