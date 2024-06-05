@@ -3,6 +3,7 @@ import React from "react"
 
 import { Avatar, AvatarFallback } from "components/ui/avatar"
 import { getInitials, instance, sanitize } from "lib"
+import { Button } from "components/ui/button"
 import { endpoints } from "config"
 import { store } from "store"
 
@@ -59,7 +60,10 @@ const Dashboard = () => {
 					{user?.role === "student" && (
 						<div className="flex w-full flex-col gap-10">
 							<div className="flex min-h-[500px] w-full flex-col gap-4 rounded-md border bg-black/30 p-4">
-								<p className="text-xl font-medium">Registered Courses</p>
+								<div className="flex w-full items-center justify-between">
+									<p className="text-xl font-medium">Registered Courses</p>
+									<Button size="sm"></Button>
+								</div>
 								<div className="flex w-full flex-col">
 									{registeredCourses.map((_, index) => (
 										<div key={index}>{index}</div>
