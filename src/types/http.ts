@@ -1,7 +1,7 @@
 export type HttpError = {
 	response: {
 		data: {
-			error: string
+			detail: string
 		}
 	}
 }

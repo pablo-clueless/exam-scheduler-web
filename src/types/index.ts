@@ -2,7 +2,7 @@ export type UserProps = {
 	email: string
 	full_name: string
 	id: string
-	role: "student" | "supervisor" | "admin"
+	role: "student" | "supervisor" | "exam_officer"
 	created_at: string
 	updated_at: string
 }

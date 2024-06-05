@@ -7,6 +7,7 @@ import React from "react"
 import { Button } from "components/ui/button"
 import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
+import { HttpError } from "types/http"
 import { FacultyProps } from "types"
 import { Spinner } from "components"
 import { endpoints } from "config"
@@ -19,7 +20,8 @@ import {
 	SelectValue,
 } from "components/ui/select"
 
-const initialValues = { department_name: "", faculty: "" }
+type Payload = { department_name: string[]; faculty: string }
+const initialValues: Payload = { department_name: [], faculty: "" }
 
 const CreateDepartment = () => {
 	const navigate = useNavigate()
@@ -37,11 +39,14 @@ const CreateDepartment = () => {
 	}, [data])
 
 	const { isPending, mutateAsync } = useMutation({
-		mutationFn: (payload: typeof initialValues) =>
+		mutationFn: (payload: Payload) =>
 			instance.post(`${endpoints().departments.create}`, payload),
 		mutationKey: ["create-department"],
 		onSuccess: ({ data }) => console.log(data),
-		onError: (error) => console.log(error),
+		onError: ({ response }: HttpError) => {
+			const { detail } = response.data
+			toast.error(detail)
+		},
 	})
 
 	const { handleChange, handleSubmit, setFieldValue } = useFormik({
@@ -56,7 +61,11 @@ const CreateDepartment = () => {
 				}
 			})
 			if (!hasEmptyValues) {
-				mutateAsync(values)
+				const payload: Payload = {
+					department_name: [...values.department_name],
+					faculty: values.faculty,
+				}
+				mutateAsync(payload)
 			}
 		},
 	})

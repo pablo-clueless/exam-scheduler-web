@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 import { useFormik } from "formik"
 import { toast } from "sonner"
+import axios from "axios"
 
 import { Checkbox } from "components/ui/checkbox"
 import { Button } from "components/ui/button"
@@ -11,7 +12,6 @@ import { HttpError } from "types/http"
 import { Spinner } from "components"
 import { endpoints } from "config"
 import { Login } from "assets"
-import { instance } from "lib"
 import { store } from "store"
 
 const initialValues = { email: "", password: "" }
@@ -24,7 +24,7 @@ const Home = () => {
 
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: (payload: typeof initialValues) =>
-			instance.post(`${endpoints().auth.login}`, payload),
+			axios.post(`${endpoints().auth.login}`, payload),
 		mutationKey: ["login"],
 		onSuccess: ({ data }) => {
 			const { token, user } = data
@@ -32,8 +32,8 @@ const Home = () => {
 			navigate("/dashboard/courses")
 		},
 		onError: ({ response }: HttpError) => {
-			const { error } = response.data
-			toast.error(error)
+			const { detail } = response.data
+			toast.error(detail)
 		},
 	})
 

@@ -2,14 +2,15 @@ import { Link, useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 import { useFormik } from "formik"
 import { toast } from "sonner"
+import axios from "axios"
 
 import { Button } from "components/ui/button"
 import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
-import { instance, sanitize } from "lib"
 import { HttpError } from "types/http"
 import { Spinner } from "components"
 import { endpoints } from "config"
+import { sanitize } from "lib"
 import { SignUp } from "assets"
 import {
 	Select,
@@ -35,7 +36,7 @@ const Signup = () => {
 
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: (payload: typeof initialValues) =>
-			instance.post(`${endpoints().auth.register}`, payload),
+			axios.post(`${endpoints().auth.register}`, payload),
 		mutationKey: ["login"],
 		onSuccess: ({ data }) => {
 			const { message } = data
@@ -43,8 +44,8 @@ const Signup = () => {
 			navigate("/")
 		},
 		onError: ({ response }: HttpError) => {
-			const { error } = response.data
-			toast.error(error)
+			const { detail } = response.data
+			toast.error(detail)
 		},
 	})
 

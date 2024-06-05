@@ -24,9 +24,15 @@ export const store = create<Store>()(
 				})
 				set(() => ({ user, isAuthenticated: true }))
 			},
-			signOut: () => {
-				Cookies.remove("EXAM_AUTH_TOKEN")
-				set(() => ({ user: null, isAuthenticated: false }))
+			signOut: async () => {
+				try {
+					Cookies.set("EXAM_AUTH_TOKEN", "", { expires: 0 })
+					set(() => ({ user: null, isAuthenticated: false }))
+					window.localStorage.removeItem("exam-store")
+					window.location.replace("/")
+				} catch (error) {
+					console.log(error)
+				}
 			},
 		}),
 		{ name: "exam-store" }

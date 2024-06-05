@@ -2,11 +2,11 @@ import Cookies from "js-cookie"
 import axios from "axios"
 
 const createInstance = () => {
-	let instance = axios.create()
+	const instance = axios.create()
 
 	instance.interceptors.request.use((config) => {
 		const token = Cookies.get("EXAM_AUTH_TOKEN")
-		config.headers.Authorization = `Bearer ${token}`
+		config.headers.Authorization = `Token ${token}`
 		return config
 	})
 
