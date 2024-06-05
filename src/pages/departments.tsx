@@ -55,12 +55,11 @@ const Departments = () => {
 							{paginated.map((department) => (
 								<TableRow key={department.id}>
 									<TableCell>{department.id}</TableCell>
-									<TableCell>{department.department_name}</TableCell>
-									<TableCell>{department.faculty}</TableCell>
-									<TableCell>
-										<Link to={`/dashboard/departments/${department.id}`}>
-											<Button>View</Button>
-										</Link>
+									<TableCell className="capitalize">
+										{department.department_name}
+									</TableCell>
+									<TableCell className="capitalize">
+										{department.faculty.faculty_name}
 									</TableCell>
 								</TableRow>
 							))}

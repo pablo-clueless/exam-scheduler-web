@@ -51,7 +51,7 @@ export type ScheduleProps = {
 
 export type DepartmentProps = {
 	department_name: string
-	faculty: number
+	faculty: FacultyProps
 	id: number
 }
 
