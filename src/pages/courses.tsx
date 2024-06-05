@@ -54,6 +54,7 @@ const Courses = () => {
 						<TableBody>
 							{paginated.map((course) => (
 								<TableRow key={course.id}>
+									<TableCell>{course.id}</TableCell>
 									<TableCell>{course.course_name}</TableCell>
 									<TableCell>{course.course_code}</TableCell>
 									<TableCell>{course.department}</TableCell>
