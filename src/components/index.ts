@@ -1,5 +1,6 @@
 export * from "./appbar"
 export * from "./footer"
 export * from "./pagination"
+export * from "./register-course"
 export * from "./sidebar"
 export * from "./spinner"

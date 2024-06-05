@@ -1,14 +1,17 @@
 import { useQuery } from "@tanstack/react-query"
 import React from "react"
 
+import { Dialog, DialogContent, DialogTrigger } from "components/ui/dialog"
 import { Avatar, AvatarFallback } from "components/ui/avatar"
 import { getInitials, instance, sanitize } from "lib"
 import { Button } from "components/ui/button"
+import { RegisterCourse } from "components"
 import { endpoints } from "config"
 import { store } from "store"
 
 const Dashboard = () => {
 	const [registeredCourses] = React.useState([])
+	const [open, setOpen] = React.useState(false)
 	const { user } = store()
 
 	const { data } = useQuery({
@@ -62,7 +65,16 @@ const Dashboard = () => {
 							<div className="flex min-h-[500px] w-full flex-col gap-4 rounded-md border bg-black/30 p-4">
 								<div className="flex w-full items-center justify-between">
 									<p className="text-xl font-medium">Registered Courses</p>
-									<Button size="sm"></Button>
+									<Dialog open={open} onOpenChange={() => setOpen(!open)}>
+										<DialogTrigger asChild>
+											<Button onClick={() => setOpen(false)} size="sm">
+												Register Course
+											</Button>
+										</DialogTrigger>
+										<DialogContent>
+											<RegisterCourse />
+										</DialogContent>
+									</Dialog>
 								</div>
 								<div className="flex w-full flex-col">
 									{registeredCourses.map((_, index) => (
