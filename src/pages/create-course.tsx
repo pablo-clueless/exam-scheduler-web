@@ -22,6 +22,7 @@ import { DepartmentProps } from "types"
 
 const initialValues = {
 	course_name: "",
+	course_code: "",
 	description: "",
 	department: "",
 }
@@ -79,6 +80,10 @@ const CreateCourse = () => {
 					<div className="w-full">
 						<Label htmlFor="course_name">Course Name</Label>
 						<Input type="text" name="course_name" onChange={handleChange} />
+					</div>
+					<div className="w-full">
+						<Label htmlFor="course_name">Course Code</Label>
+						<Input type="text" name="course_code" onChange={handleChange} />
 					</div>
 					<div className="w-full">
 						<Label htmlFor="department">Department</Label>
