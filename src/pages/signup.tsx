@@ -38,9 +38,8 @@ const Signup = () => {
 		mutationFn: (payload: typeof initialValues) =>
 			axios.post(`${endpoints().auth.register}`, payload),
 		mutationKey: ["login"],
-		onSuccess: ({ data }) => {
-			const { message } = data
-			toast.success(message)
+		onSuccess: () => {
+			toast.success("Account created successfully")
 			navigate("/")
 		},
 		onError: ({ response }: HttpError) => {

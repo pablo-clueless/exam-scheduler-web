@@ -29,7 +29,8 @@ const Home = () => {
 		onSuccess: ({ data }) => {
 			const { token, user } = data
 			signIn(user, token)
-			navigate("/dashboard/courses")
+			toast.success("User logged in!")
+			navigate("/dashboard")
 		},
 		onError: ({ response }: HttpError) => {
 			const { detail } = response.data
