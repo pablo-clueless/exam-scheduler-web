@@ -7,6 +7,7 @@ import Pagination from "components/pagination"
 import { Button } from "components/ui/button"
 import { ScheduleProps } from "types"
 import { endpoints } from "config"
+import { store } from "store"
 import {
 	Table,
 	TableBody,
@@ -20,6 +21,7 @@ const Schedules = () => {
 	const [schedules, setSchedules] = React.useState<ScheduleProps[]>([])
 	const [page, setPage] = React.useState(1)
 	const navigate = useNavigate()
+	const { user } = store()
 
 	const { data } = useQuery({
 		queryFn: () =>
@@ -39,7 +41,7 @@ const Schedules = () => {
 			<div className="flex w-full items-center justify-between">
 				<p className="text-xl font-bold">Schedules</p>
 				<Link to="/dashboard/schedules/create">
-					<Button>Add Schedule</Button>
+					{user?.role === "exam_officer" && <Button>Add Schedule</Button>}
 				</Link>
 			</div>
 			<div className="flex h-[90dvh] w-full flex-col gap-10">

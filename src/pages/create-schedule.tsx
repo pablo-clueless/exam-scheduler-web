@@ -5,7 +5,7 @@ import { useFormik } from "formik"
 import { toast } from "sonner"
 import React from "react"
 
-import { ExamOfficerProps, SupervisorProps } from "types"
+import { CourseProps, ExamOfficerProps, SupervisorProps } from "types"
 import { Button } from "components/ui/button"
 import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
@@ -19,7 +19,7 @@ import {
 	SelectValue,
 } from "components/ui/select"
 
-import { CourseList, VenueList, endpoints } from "config"
+import { VenueList, endpoints } from "config"
 
 type SchedulePayload = {
 	course: string
@@ -42,7 +42,11 @@ const CreateSchedule = () => {
 
 	const today = new Date().toISOString()
 
-	const [{ data: examOfficerQuery }, { data: supervisorQuery }] = useQueries({
+	const [
+		{ data: examOfficerQuery },
+		{ data: supervisorQuery },
+		{ data: coursesQuery },
+	] = useQueries({
 		queries: [
 			{
 				queryFn: () => instance.get(`${endpoints().exam_officers.all}`),
@@ -51,6 +55,11 @@ const CreateSchedule = () => {
 			{
 				queryFn: () => instance.get(`${endpoints().supervisors.all}`),
 				queryKey: ["get-supervisors"],
+			},
+			{
+				queryFn: () =>
+					instance.get(endpoints().courses.all).then((res) => res.data),
+				queryKey: ["get-courses"],
 			},
 		],
 	})
@@ -88,6 +97,7 @@ const CreateSchedule = () => {
 
 	const [examOfficers, setExamOfficers] = React.useState<ExamOfficerProps[]>([])
 	const [supervisors, setSupervisors] = React.useState<SupervisorProps[]>([])
+	const [courses, setCourses] = React.useState<CourseProps[]>([])
 	React.useEffect(() => {
 		if (examOfficerQuery) {
 			setExamOfficers(examOfficerQuery.data)
@@ -98,6 +108,11 @@ const CreateSchedule = () => {
 			setSupervisors(supervisorQuery.data)
 		}
 	}, [supervisorQuery])
+	React.useEffect(() => {
+		if (coursesQuery) {
+			setCourses(coursesQuery.data)
+		}
+	}, [coursesQuery])
 
 	return (
 		<div className="flex h-full w-full flex-col gap-10 p-5">
@@ -116,9 +131,9 @@ const CreateSchedule = () => {
 								<SelectValue placeholder="Select course" />
 							</SelectTrigger>
 							<SelectContent>
-								{CourseList.map((course) => (
-									<SelectItem key={course.code} value={course.code}>
-										{course.title}
+								{courses.map((course) => (
+									<SelectItem key={course.id} value={course.id}>
+										{course.course_name}
 									</SelectItem>
 								))}
 							</SelectContent>

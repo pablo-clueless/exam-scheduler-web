@@ -7,6 +7,7 @@ import { Button } from "components/ui/button"
 import { instance, paginate } from "lib"
 import { DepartmentProps } from "types"
 import { endpoints } from "config"
+import { store } from "store"
 import {
 	Table,
 	TableBody,
@@ -19,6 +20,7 @@ import {
 const Departments = () => {
 	const [departments, setDepartments] = React.useState<DepartmentProps[]>([])
 	const [page, setPage] = React.useState(1)
+	const { user } = store()
 
 	const { data } = useQuery({
 		queryFn: () =>
@@ -38,7 +40,7 @@ const Departments = () => {
 			<div className="flex w-full items-center justify-between">
 				<p className="text-xl font-bold">Departments</p>
 				<Link to="/dashboard/departments/create">
-					<Button>Add Department</Button>
+					{user?.role === "exam_officer" && <Button>Add Department</Button>}
 				</Link>
 			</div>
 			<div className="flex h-[90dvh] w-full flex-col gap-10">

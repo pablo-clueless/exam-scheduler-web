@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 import React from "react"
 
+import { generateMatric, instance, paginate } from "lib"
 import Pagination from "components/pagination"
 import { Button } from "components/ui/button"
-import { instance, paginate } from "lib"
 import { StudentProps } from "types"
 import { endpoints } from "config"
 import {
@@ -49,9 +49,11 @@ const Students = () => {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{paginated.map((student) => (
+							{paginated.map((student, index) => (
 								<TableRow key={student.id}>
-									<TableCell>{student.student_reg_number}</TableCell>
+									<TableCell>
+										{generateMatric(student.student_reg_number, index + 1)}
+									</TableCell>
 									<TableCell>{student.student.full_name}</TableCell>
 									<TableCell>{student.department}</TableCell>
 									<TableCell>{student.year}</TableCell>

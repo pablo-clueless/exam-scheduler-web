@@ -7,6 +7,7 @@ import { Button } from "components/ui/button"
 import { instance, paginate } from "lib"
 import { CourseProps } from "types"
 import { endpoints } from "config"
+import { store } from "store"
 import {
 	Table,
 	TableBody,
@@ -19,6 +20,7 @@ import {
 const Courses = () => {
 	const [courses, setCourses] = React.useState<CourseProps[]>([])
 	const [page, setPage] = React.useState(1)
+	const { user } = store()
 
 	const { data } = useQuery({
 		queryFn: () => instance.get(endpoints().courses.all).then((res) => res.data),
@@ -37,7 +39,7 @@ const Courses = () => {
 			<div className="flex w-full items-center justify-between">
 				<p className="text-xl font-bold">Courses</p>
 				<Link to="/dashboard/courses/create">
-					<Button>Add Course</Button>
+					{user?.role === "exam_officer" && <Button>Add Course</Button>}
 				</Link>
 			</div>
 			<div className="flex h-[90dvh] w-full flex-col gap-10">
