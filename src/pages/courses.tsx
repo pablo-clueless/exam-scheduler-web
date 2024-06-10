@@ -57,7 +57,7 @@ const Courses = () => {
 							{paginated.map((course, index) => (
 								<TableRow key={course.id}>
 									<TableCell>{index + 1}</TableCell>
-									<TableCell>{course.course_name}</TableCell>
+									<TableCell className="capitalize">{course.course_name}</TableCell>
 									<TableCell>{course.course_code}</TableCell>
 									<TableCell>{course.department}</TableCell>
 								</TableRow>
