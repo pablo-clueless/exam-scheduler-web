@@ -1,5 +1,6 @@
 export * from "./date"
 export * from "./https"
 export * from "./paginate"
+export * from "./query"
 export * from "./strings"
 export * from "./utils"

@@ -9,9 +9,8 @@ import { CourseProps, ExamOfficerProps, SupervisorProps } from "types"
 import { Button } from "components/ui/button"
 import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
+import { instance, queryClient } from "lib"
 import { Spinner } from "components"
-import { queryClient } from "main"
-import { instance } from "lib"
 import {
 	Select,
 	SelectContent,
