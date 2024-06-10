@@ -10,6 +10,7 @@ import { Button } from "components/ui/button"
 import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
 import { Spinner } from "components"
+import { queryClient } from "main"
 import { instance } from "lib"
 import {
 	Select,
@@ -68,7 +69,11 @@ const CreateSchedule = () => {
 		mutationFn: (payload: SchedulePayload) =>
 			instance.post(`${endpoints().exam_schedules.create}`, payload),
 		mutationKey: ["create-schedule"],
-		onSuccess: ({ data }) => console.log(data),
+		onSuccess: ({ data }) => {
+			console.log(data)
+			queryClient.invalidateQueries({ queryKey: ["get-exam_schedules"] })
+			navigate("/dashboard/schedules")
+		},
 		onError: (error) => console.log(error),
 	})
 

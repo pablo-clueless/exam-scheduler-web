@@ -15,7 +15,7 @@ export const endpoints = (param?: string) => {
 	const departments = {
 		create: `${baseUrl}/departments/create/`,
 		update: `${baseUrl}/departments/update/${param}/`,
-		all: `${baseUrl}/departments`,
+		all: `${baseUrl}/departments/`,
 	}
 
 	const supervisors = {
@@ -38,13 +38,13 @@ export const endpoints = (param?: string) => {
 	}
 
 	const exam_schedules = {
-		create: `${baseUrl}/exam-schedules/create`,
+		create: `${baseUrl}/exam-schedules/create/`,
 		update: `${baseUrl}/exam-schedules/update/${param}/`,
 		all: `${baseUrl}/exam-schedules/`,
 	}
 
 	const courses = {
-		create: `${baseUrl}/courses/create`,
+		create: `${baseUrl}/courses/create/`,
 		update: `${baseUrl}/courses/update/${param}/`,
 		all: `${baseUrl}/courses/`,
 		delete_all: `${baseUrl}/courses/delete_all/`,

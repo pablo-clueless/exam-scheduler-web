@@ -10,6 +10,7 @@ import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
 import { Spinner } from "components"
 import { endpoints } from "config"
+import { queryClient } from "main"
 import { instance } from "lib"
 import {
 	Select,
@@ -46,7 +47,11 @@ const CreateCourse = () => {
 		mutationFn: (payload: typeof initialValues) =>
 			instance.post(`${endpoints().courses.create}`, payload),
 		mutationKey: ["create-course"],
-		onSuccess: ({ data }) => console.log(data),
+		onSuccess: ({ data }) => {
+			console.log(data)
+			queryClient.invalidateQueries({ queryKey: ["get-courses"] })
+			navigate("/dashboard/courses")
+		},
 		onError: (error) => console.log(error),
 	})
 
