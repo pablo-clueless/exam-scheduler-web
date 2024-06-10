@@ -48,15 +48,15 @@ const Departments = () => {
 					<Table>
 						<TableHeader>
 							<TableRow>
-								<TableHead>ID</TableHead>
+								<TableHead>S/N</TableHead>
 								<TableHead>Department Name</TableHead>
 								<TableHead>Faculty</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{paginated.map((department) => (
+							{paginated.map((department, index) => (
 								<TableRow key={department.id}>
-									<TableCell>{department.id}</TableCell>
+									<TableCell>{index + 1}</TableCell>
 									<TableCell className="capitalize">
 										{department.department_name}
 									</TableCell>

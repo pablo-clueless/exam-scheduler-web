@@ -47,16 +47,16 @@ const Courses = () => {
 					<Table>
 						<TableHeader>
 							<TableRow>
-								<TableHead>ID</TableHead>
+								<TableHead>S/N</TableHead>
 								<TableHead>Course Name</TableHead>
 								<TableHead>Course Code</TableHead>
 								<TableHead>Department</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{paginated.map((course) => (
+							{paginated.map((course, index) => (
 								<TableRow key={course.id}>
-									<TableCell>{course.id}</TableCell>
+									<TableCell>{index + 1}</TableCell>
 									<TableCell>{course.course_name}</TableCell>
 									<TableCell>{course.course_code}</TableCell>
 									<TableCell>{course.department}</TableCell>

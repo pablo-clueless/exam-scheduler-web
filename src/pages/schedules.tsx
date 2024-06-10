@@ -49,7 +49,7 @@ const Schedules = () => {
 					<Table>
 						<TableHeader>
 							<TableRow>
-								<TableHead>ID</TableHead>
+								<TableHead>S/N</TableHead>
 								<TableHead>Date</TableHead>
 								<TableHead>Venue</TableHead>
 								<TableHead>Exam Officer</TableHead>
@@ -57,9 +57,8 @@ const Schedules = () => {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{paginated.map((schedule) => (
-								<TableRow key={schedule.id}>
-									<TableCell>{schedule.id}</TableCell>
+							{paginated.map((schedule, index) => (
+								<TableRow key={index + 1}>
 									<TableCell>{formatDate(schedule.date_time)}</TableCell>
 									<TableCell className="capitalize">{schedule.venue}</TableCell>
 									<TableCell>{schedule.exam_officer.exam_officer.full_name}</TableCell>
