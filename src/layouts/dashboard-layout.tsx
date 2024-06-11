@@ -10,7 +10,7 @@ const DashboardLayout = () => {
 			direction="horizontal"
 			style={{ height: "100dvh" }}
 			className={cn("w-full")}>
-			<ResizablePanel className={cn("max-w-[250px]", "min-w-[250px]", "h-full")}>
+			<ResizablePanel className={cn("max-w-[300px]", "min-w-[300px]", "h-full")}>
 				<Sidebar />
 			</ResizablePanel>
 			<ResizablePanel className="h-full w-full px-4">

@@ -1,15 +1,16 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import React from "react"
 
+import { Button } from "components/ui/button"
 import { SupervisorProps } from "types"
 import { formatDate } from "lib"
 
 const Supervisor = () => {
 	const [supervisor, setSupervisor] = React.useState<SupervisorProps>()
 	const { state } = useLocation()
+	const navigate = useNavigate()
 
 	React.useEffect(() => {
-		console.log(state)
 		setSupervisor(state)
 	}, [state])
 
@@ -19,6 +20,9 @@ const Supervisor = () => {
 		<div className="flex h-full w-full flex-col gap-10 p-5">
 			<div className="flex w-full items-center justify-between">
 				<p className="text-xl font-bold">Supervisor {supervisor.employee_id}</p>
+				<Button size="sm" onClick={() => navigate(-1)}>
+					Back
+				</Button>
 			</div>
 			<div className="h-[90dvh] w-full">
 				<div className="flex w-full flex-col gap-4">

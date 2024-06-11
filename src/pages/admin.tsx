@@ -1,12 +1,14 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import React from "react"
 
+import { Button } from "components/ui/button"
 import { ExamOfficerProps } from "types"
 import { formatDate } from "lib"
 
 const Admin = () => {
 	const [examOfficer, setExamOfficer] = React.useState<ExamOfficerProps>()
 	const { state } = useLocation()
+	const navigate = useNavigate()
 
 	React.useEffect(() => {
 		setExamOfficer(state)
@@ -19,6 +21,9 @@ const Admin = () => {
 			<div className="flex w-full items-center justify-between">
 				<p className="text-xl font-bold">
 					Examination Officer {examOfficer.employee_id}
+					<Button size="sm" onClick={() => navigate(-1)}>
+						Back
+					</Button>
 				</p>
 			</div>
 			<div className="h-[90dvh] w-full">

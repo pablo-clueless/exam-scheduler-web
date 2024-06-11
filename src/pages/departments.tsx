@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
 import React from "react"
 
 import Pagination from "components/pagination"
-import { Button } from "components/ui/button"
 import { instance, paginate } from "lib"
 import { DepartmentProps } from "types"
 import { endpoints } from "config"
-import { store } from "store"
 import {
 	Table,
 	TableBody,
@@ -20,7 +17,6 @@ import {
 const Departments = () => {
 	const [departments, setDepartments] = React.useState<DepartmentProps[]>([])
 	const [page, setPage] = React.useState(1)
-	const { user } = store()
 
 	const { data } = useQuery({
 		queryFn: () =>
@@ -39,9 +35,6 @@ const Departments = () => {
 		<div className="flex h-full w-full flex-col gap-5 p-5">
 			<div className="flex w-full items-center justify-between">
 				<p className="text-xl font-bold">Departments</p>
-				<Link to="/dashboard/departments/create">
-					{user?.role === "exam_officer" && <Button>Add Department</Button>}
-				</Link>
 			</div>
 			<div className="flex h-[90dvh] w-full flex-col gap-10">
 				<div className="h-[615px] w-full">

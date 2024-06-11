@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import React from "react"
 
 import { generateMatric, instance, paginate } from "lib"
@@ -19,6 +19,7 @@ import {
 const Students = () => {
 	const [students, setStudents] = React.useState<StudentProps[]>([])
 	const [page, setPage] = React.useState(1)
+	const navigate = useNavigate()
 
 	const { data } = useQuery({
 		queryFn: () => instance.get(endpoints().students.all).then((res) => res.data),
@@ -58,9 +59,12 @@ const Students = () => {
 									<TableCell>{student.department}</TableCell>
 									<TableCell>{student.year}</TableCell>
 									<TableCell>
-										<Link to={`/dashboard/students/${student.id}`}>
-											<Button>View</Button>
-										</Link>
+										<Button
+											onClick={() =>
+												navigate(`/dashboard/students/${student.id}`, { state: student })
+											}>
+											View
+										</Button>
 									</TableCell>
 								</TableRow>
 							))}

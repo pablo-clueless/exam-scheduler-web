@@ -10,7 +10,9 @@ export const Sidebar = () => {
 	return (
 		<div className="flex h-full w-full flex-col justify-between border-r p-4">
 			<div className="flex w-full flex-col gap-5">
-				<p className="text-xl font-bold">Exam Scheduler</p>
+				<div className="w-full py-1">
+					<p className="text-xl font-bold">Exam Management System</p>
+				</div>
 				<div className="flex flex-col gap-4 border-y py-4">
 					{SidebarLinks.map((link) => (
 						<Link

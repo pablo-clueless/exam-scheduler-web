@@ -5,12 +5,13 @@ import { useFormik } from "formik"
 import { toast } from "sonner"
 import React from "react"
 
-import { CourseProps, ExamOfficerProps, SupervisorProps } from "types"
+import { CourseProps, SupervisorProps } from "types"
 import { Button } from "components/ui/button"
 import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
 import { instance, queryClient } from "lib"
 import { Spinner } from "components"
+import { store } from "store"
 import {
 	Select,
 	SelectContent,
@@ -39,21 +40,15 @@ const initialValues: SchedulePayload = {
 
 const CreateSchedule = () => {
 	const navigate = useNavigate()
+	const { user } = store()
 
 	const today = new Date().toISOString()
 
-	const [
-		{ data: examOfficerQuery },
-		{ data: supervisorQuery },
-		{ data: coursesQuery },
-	] = useQueries({
+	const [{ data: supervisorQuery }, { data: coursesQuery }] = useQueries({
 		queries: [
 			{
-				queryFn: () => instance.get(`${endpoints().exam_officers.all}`),
-				queryKey: ["get-exam-officers"],
-			},
-			{
-				queryFn: () => instance.get(`${endpoints().supervisors.all}`),
+				queryFn: () =>
+					instance.get(`${endpoints().supervisors.all}`).then((res) => res.data),
 				queryKey: ["get-supervisors"],
 			},
 			{
@@ -64,7 +59,7 @@ const CreateSchedule = () => {
 		],
 	})
 
-	const { isPending } = useMutation({
+	const { isPending, mutateAsync } = useMutation({
 		mutationFn: (payload: SchedulePayload) =>
 			instance.post(`${endpoints().exam_schedules.create}`, payload),
 		mutationKey: ["create-schedule"],
@@ -79,7 +74,8 @@ const CreateSchedule = () => {
 	const { handleChange, handleSubmit, setFieldValue, values } = useFormik({
 		initialValues,
 		onSubmit: (values) => {
-			console.log(values)
+			const payload = { ...values, exam_officer: String(user?.id) }
+			mutateAsync(payload)
 		},
 	})
 
@@ -99,14 +95,8 @@ const CreateSchedule = () => {
 		)
 	}
 
-	const [examOfficers, setExamOfficers] = React.useState<ExamOfficerProps[]>([])
 	const [supervisors, setSupervisors] = React.useState<SupervisorProps[]>([])
 	const [courses, setCourses] = React.useState<CourseProps[]>([])
-	React.useEffect(() => {
-		if (examOfficerQuery) {
-			setExamOfficers(examOfficerQuery.data)
-		}
-	}, [examOfficerQuery])
 	React.useEffect(() => {
 		if (supervisorQuery) {
 			setSupervisors(supervisorQuery.data)
@@ -114,7 +104,7 @@ const CreateSchedule = () => {
 	}, [supervisorQuery])
 	React.useEffect(() => {
 		if (coursesQuery) {
-			setCourses(coursesQuery.data)
+			setCourses(coursesQuery)
 		}
 	}, [coursesQuery])
 
@@ -135,7 +125,7 @@ const CreateSchedule = () => {
 								<SelectValue placeholder="Select course" />
 							</SelectTrigger>
 							<SelectContent>
-								{courses.map((course) => (
+								{courses?.map((course) => (
 									<SelectItem key={course.id} value={course.id}>
 										{course.course_name}
 									</SelectItem>
@@ -188,24 +178,9 @@ const CreateSchedule = () => {
 								<SelectValue placeholder="Select supervisor" />
 							</SelectTrigger>
 							<SelectContent>
-								{supervisors.map((supervisor) => (
+								{supervisors?.map((supervisor) => (
 									<SelectItem key={supervisor.id} value={supervisor.id}>
 										{supervisor.supervisor.full_name}
-									</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
-					</div>
-					<div className="w-full">
-						<Label htmlFor="">Exam Officers</Label>
-						<Select onValueChange={(value) => setFieldValue("exam_officer", value)}>
-							<SelectTrigger>
-								<SelectValue placeholder="Select exam officer" />
-							</SelectTrigger>
-							<SelectContent>
-								{examOfficers.map((examOfficer) => (
-									<SelectItem key={examOfficer.id} value={examOfficer.id}>
-										{examOfficer.exam_officer.full_name}
 									</SelectItem>
 								))}
 							</SelectContent>
